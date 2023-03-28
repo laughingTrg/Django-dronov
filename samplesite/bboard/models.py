@@ -1,7 +1,7 @@
 from os import error
 from django.db import models
 from django.core import validators
-from django.core.exceptions import ValidationError, NON_FIELDS_ERRORS
+from django.core.exceptions import ValidationError 
 
 def validate_even(val):
     if val % 2 != 0:
@@ -21,7 +21,7 @@ class MinMaxValueValidator:
 
 class Bb(models.Model):
     title = models.CharField(max_length=50, verbose_name='Товар', 
-            validators=[validators.RegexValidator(regex='^.(4,)$')], 
+            validators=[validators.RegexValidator(regex='^.{4,}$')], 
             error_messages={'invalid': 'Неправильное название товара'})
     content= models.TextField(null=True, blank=True, verbose_name='Описание')
     price = models.FloatField(null=True, blank=True, verbose_name='Цена',
@@ -49,7 +49,7 @@ class Bb(models.Model):
             errors['price'] = ValidationError('Укажите неотрицательное значение цены')
 
         if errors:
-            errors[NON_FIELDS_ERRORS] = ValidationError('Ошибка модели!')
+           # errors[NON_FIELDS_ERRORS] = ValidationError('Ошибка модели!')
             raise ValidationError(errors)
 
     class Meta:

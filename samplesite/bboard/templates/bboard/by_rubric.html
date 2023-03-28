@@ -4,11 +4,13 @@
 
 {% block content %}
 <h2>Рубрика: {{ current_rubric.name }}</h2>
-    {% for bb in bbs %}
-    <div>
-      <h2>{{ bb.title }}</h2>
-      <p>{{ bb.content }}</p>
-      <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
-    </div>
-    {% endfor %}
-    {% endblock %}
+{% for bb in bbs %}
+<div>
+  <h2><a href="{% url 'detail' pk=bb.pk %}">{{ bb.title }}</a></h2>
+  <p>{{ bb.content }}</p>
+  <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
+  <p><a href="{% url 'update' pk=bb.pk %}">Изменить</a></p>
+
+</div>
+{% endfor %}
+{% endblock %}

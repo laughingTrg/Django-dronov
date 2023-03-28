@@ -1,8 +1,19 @@
-{% extends "layout/basic.html" %} {% block content %} {% for bb in bbs %}
+{% extends "layout/basic.html" %}
+
+{% block content %}
+<p>
+  {% for d in date_list %}
+  {{ d.year }}
+  {% endfor %}
+</p>
+{% for bb in bbs %}
 <div>
-  <h2>{{ bb.title_and_price }}</h2>
+  <h2><a href="{% url 'detail' pk=bb.pk %}">{{ bb.title }}</a></h2>
   <p>{{ bb.content }}</p>
   <p><a href="{% url 'by_rubric' bb.rubric.pk %}">{{ bb.rubric.name }}</a></p>
   <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
+  <p><a href="{% url 'update' pk=bb.pk %}">Изменить</a></p>
+
 </div>
-{% endfor %} {% endblock %}
+{% endfor %}
+{% endblock %}
